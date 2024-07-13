@@ -33,6 +33,14 @@ public class PointOfInterestService {
         long yAxisMinimum = yAxis - maximumDistance;
         long yAxisMaximum = yAxis + maximumDistance;
 
-        return repository.findNearPoints(xAxisMinimum, xAxisMaximum, yAxisMinimum, yAxisMaximum);
+        List<PointOfInterest> nearPoints = repository.findNearPoints(xAxisMinimum, xAxisMaximum, yAxisMinimum, yAxisMaximum);
+
+        return nearPoints.stream()
+                .filter(poi -> calculateDistance(xAxis, yAxis, poi.getxAxis(), poi.getyAxis()) <= maximumDistance)
+                .toList();
+    }
+
+    private Double calculateDistance(Long xA, Long yA, Long xB, Long yB) {
+        return Math.sqrt(Math.pow(xB - xA, 2) + Math.pow(yB - yA, 2));
     }
 }
