@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PointOfInterestService {
 
@@ -23,5 +25,14 @@ public class PointOfInterestService {
 
     public Page<PointOfInterest> findAll(PageRequest pageRequest) {
         return repository.findAll(pageRequest);
+    }
+
+    public List<PointOfInterest> findNearPoints(Long xAxis, Long yAxis, Long maximumDistance) {
+        long xAxisMinimum = xAxis - maximumDistance;
+        long xAxisMaximum = xAxis + maximumDistance;
+        long yAxisMinimum = yAxis - maximumDistance;
+        long yAxisMaximum = yAxis + maximumDistance;
+
+        return repository.findNearPoints(xAxisMinimum, xAxisMaximum, yAxisMinimum, yAxisMaximum);
     }
 }

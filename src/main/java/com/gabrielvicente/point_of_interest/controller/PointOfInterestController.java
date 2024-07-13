@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class PointOfInterestController {
 
@@ -29,5 +31,13 @@ public class PointOfInterestController {
                                                                      @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
         Page<PointOfInterest> paginatedPointsOfInterest = pointOfInterestService.findAll(PageRequest.of(page, pageSize));
         return ResponseEntity.ok(paginatedPointsOfInterest);
+    }
+
+    @GetMapping("/near-points")
+    public ResponseEntity<List<PointOfInterest>> listNearPointOfInterest(@RequestParam(name = "xAxis") Long xAxis,
+                                                                         @RequestParam(name = "yAxis") Long yAxis,
+                                                                         @RequestParam(name = "maximumDistance") Long maximumDistance) {
+        List<PointOfInterest> nearPoints = pointOfInterestService.findNearPoints(xAxis, yAxis, maximumDistance);
+        return ResponseEntity.ok(nearPoints);
     }
 }
