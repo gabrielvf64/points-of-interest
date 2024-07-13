@@ -14,15 +14,15 @@ public class PointOfInterest {
 
     private Long xAxis;
 
-    private Long yAxix;
+    private Long yAxis;
 
     public PointOfInterest() {
     }
 
-    public PointOfInterest(String name, Long xAxis, Long yAxix) {
+    public PointOfInterest(String name, Long xAxis, Long yAxis) {
         this.name = name;
         this.xAxis = xAxis;
-        this.yAxix = yAxix;
+        this.yAxis = yAxis;
     }
 
     public Long getId() {
@@ -49,11 +49,11 @@ public class PointOfInterest {
         this.xAxis = xAxis;
     }
 
-    public Long getyAxix() {
-        return yAxix;
+    public Long getyAxis() {
+        return yAxis;
     }
 
-    public void setyAxix(Long yAxix) {
-        this.yAxix = yAxix;
+    public void setyAxis(Long yAxis) {
+        this.yAxis = yAxis;
     }
 }
